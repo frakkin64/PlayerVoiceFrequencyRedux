@@ -7,10 +7,9 @@ on:
       - 1.10.984.0
     paths:
       - ".github/workflows/build.yml"
-      - "include/**"
+      - "lib/**"
       - "src/**"
       - "xmake.lua"
-      - "xmake-rules.lua"
   pull_request:
     branches:
       - 1.11.191.0
@@ -24,7 +23,6 @@ jobs:
       fail-fast: false
       matrix:
         mode:
-          - debug
           - release
     steps:
       - name: Checkout
@@ -42,3 +40,12 @@ jobs:
 
       - name: Build
         run: xmake build -y -vD
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: PlayerVoiceFrequency-windows-x64-${{ matrix.mode }}
+          path: |
+            build/windows/x64/${{ matrix.mode }}/PlayerVoiceFrequency.dll
+            build/windows/x64/${{ matrix.mode }}/PlayerVoiceFrequency.pdb
+          if-no-files-found: error
