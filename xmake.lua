@@ -2,21 +2,22 @@
 includes("lib/commonlibf4")
 
 -- set project constants
-set_project("commonlibf4-template")
-set_version("0.0.0")
+set_project("PlayerVoiceFrequencyRedux")
+set_version("1.0.0")
 set_license("GPL-3.0")
 set_languages("c++23")
 set_warnings("allextra")
+set_symbols("debug")
 
 -- add common rules
 add_rules("mode.debug", "mode.releasedbg")
 add_rules("plugin.vsxmake.autoupdate")
 
 -- define targets
-target("commonlibf4-template")
+target("PlayerVoiceFrequency")
     add_rules("commonlibf4.plugin", {
-        name = "commonlibf4-template",
-        author = "libxse",
+        name = "PlayerVoiceFrequencyRedux",
+        author = "frakkin64",
         description = "F4SE plugin template using CommonLibF4"
     })
 
