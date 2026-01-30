@@ -65,7 +65,8 @@ jobs:
 
       - name: Zip combined artifact
         run: |
-          7z a -t7z -mx=9 PlayerVoiceFrequencyRedux.7z artifacts\*
+          cd artifacts
+          7z a -t7z -mx=9 ..\PlayerVoiceFrequencyRedux.7z .
 
       - name: Upload artifact to GitHub Release
         uses: softprops/action-gh-release@v2
