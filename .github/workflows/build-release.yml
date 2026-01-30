@@ -1,0 +1,75 @@
+name: build-release
+
+on:
+  release:
+    types: [published]
+
+permissions:
+  contents: write
+
+jobs:
+  xmake:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Checkout submodules
+        run: |
+          git submodule sync --recursive
+          git submodule update --init --recursive
+
+      - name: Setup XMake
+        uses: xmake-io/github-action-setup-xmake@v1
+        with:
+          xmake-version: "latest"
+
+      - name: Build common artifacts
+        run: |
+          mkdir artifacts
+          Copy-Item dist\* -Destination artifacts -Recurse -Force
+
+      - name: Build branch 1.11.191.0
+        run: |
+          git checkout 1.11.191.0
+          git submodule sync --recursive
+          git submodule update --init --recursive
+          xmake config -y --mode=release
+          xmake build -y -vD
+          mkdir artifacts\1.11.191.0\F4SE\Plugins
+          copy build\windows\x64\release\PlayerVoiceFrequency.dll artifacts\1.11.191.0\F4SE\Plugins\
+          copy build\windows\x64\release\PlayerVoiceFrequency.pdb artifacts\1.11.191.0\F4SE\Plugins\
+          xmake f -c
+          xmake clean -a PlayerVoiceFrequency
+          xmake clean -a commonlibf4
+          xmake clean -a commonlib-shared
+
+      - name: Build branch 1.10.984.0
+        run: |
+          git checkout 1.10.984.0
+          git submodule sync --recursive
+          git submodule update --init --recursive
+          xmake config -y --mode=release
+          xmake build -y -vD
+          mkdir artifacts\1.10.984.0\F4SE\Plugins
+          copy build\windows\x64\release\PlayerVoiceFrequency.dll artifacts\1.10.984.0\F4SE\Plugins\
+          copy build\windows\x64\release\PlayerVoiceFrequency.pdb artifacts\1.10.984.0\F4SE\Plugins\
+          xmake f -c
+          xmake f -c
+          xmake clean -a PlayerVoiceFrequency
+          xmake clean -a commonlibf4
+          xmake clean -a commonlib-shared
+
+      - name: Zip combined artifact
+        run: |
+          powershell Compress-Archive `
+            -Path artifacts\* `
+            -DestinationPath PlayerVoiceFrequencyRedux.zip
+
+      - name: Upload artifact to GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: PlayerVoiceFrequencyRedux.zip
