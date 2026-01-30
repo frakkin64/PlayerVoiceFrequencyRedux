@@ -65,11 +65,9 @@ jobs:
 
       - name: Zip combined artifact
         run: |
-          powershell Compress-Archive `
-            -Path artifacts\* `
-            -DestinationPath PlayerVoiceFrequencyRedux.zip
+          7z a -t7z -mx=9 PlayerVoiceFrequencyRedux.7z artifacts\*
 
       - name: Upload artifact to GitHub Release
         uses: softprops/action-gh-release@v2
         with:
-          files: PlayerVoiceFrequencyRedux.zip
+          files: PlayerVoiceFrequencyRedux.7z
