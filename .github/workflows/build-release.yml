@@ -37,7 +37,7 @@ jobs:
           git checkout 1.11.191.0
           git submodule sync --recursive
           git submodule update --init --recursive
-          xmake config -y --mode=release
+          xmake f -y --mode=releasedbg
           xmake build -y -vD
           mkdir artifacts\1.11.191.0\F4SE\Plugins
           copy build\windows\x64\release\PlayerVoiceFrequency.dll artifacts\1.11.191.0\F4SE\Plugins\
@@ -52,12 +52,11 @@ jobs:
           git checkout 1.10.984.0
           git submodule sync --recursive
           git submodule update --init --recursive
-          xmake config -y --mode=release
+          xmake f -y --mode=releasedbg
           xmake build -y -vD
           mkdir artifacts\1.10.984.0\F4SE\Plugins
           copy build\windows\x64\release\PlayerVoiceFrequency.dll artifacts\1.10.984.0\F4SE\Plugins\
           copy build\windows\x64\release\PlayerVoiceFrequency.pdb artifacts\1.10.984.0\F4SE\Plugins\
-          xmake f -c
           xmake f -c
           xmake clean -a PlayerVoiceFrequency
           xmake clean -a commonlibf4
