@@ -3,8 +3,7 @@ name: build
 on:
   push:
     branches:
-      - 1.11.191.0
-      - 1.10.984.0
+      - main
     paths:
       - ".github/workflows/build.yml"
       - "lib/**"
@@ -12,8 +11,7 @@ on:
       - "xmake.lua"
   pull_request:
     branches:
-      - 1.11.191.0
-      - 1.10.984.0
+      - main
   workflow_dispatch:
 
 jobs:
