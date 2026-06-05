@@ -18,8 +18,6 @@ namespace Plugin
         REX::DEBUG("{}", __FUNCTION__);
 
         Load();
-        UpdateGameSetting();
-        Plugin::Hooks::UpdatePlayerFrequency();
     }
 
     void Settings::Register()
@@ -35,20 +33,6 @@ namespace Plugin
             REX::DEBUG("EventHandler Registered");
             UI->RegisterSink<RE::MenuOpenCloseEvent>(EventHandler::GetSingleton());
             bRegistered = true;
-        }
-    }
-
-    void Settings::UpdateGameSetting()
-    {
-        REX::DEBUG("{}", __FUNCTION__);
-        if (auto INISettingCollection = RE::INISettingCollection::GetSingleton())
-        {
-            const char* settingName = "fFrequency:General";
-            if (auto fPlayerVoiceFrequency = INISettingCollection->GetSetting(settingName))
-            {
-                REX::DEBUG("Setting INISettingCollection {} to {}", settingName, Plugin::Settings::General::fPlayerVoiceFrequency.GetValue());
-                fPlayerVoiceFrequency->SetFloat(Plugin::Settings::General::fPlayerVoiceFrequency.GetValue());
-            }
         }
     }
 }

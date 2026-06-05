@@ -21,10 +21,11 @@ F4SE_PLUGIN_LOAD(const F4SE::LoadInterface* a_f4se)
 	Plugin::Settings::Load();
 
 	F4SE::Init(a_f4se, {
-		.logLevel = REX::ELogLevel { Plugin::Settings::General::iLogLevel.GetValue() },
-		.trampoline = true,
-		.trampolineSize = 14
+		.logLevel = REX::ELogLevel { Plugin::Settings::General::iLogLevel.GetValue() }
 		});
+	MH_Initialize();
+	Plugin::Hooks::Install();
+	MH_EnableHook(MH_ALL_HOOKS);
 
 	F4SE::GetMessagingInterface()->RegisterListener([](F4SE::MessagingInterface::Message* a_msg)
 		{

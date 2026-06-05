@@ -10,6 +10,8 @@ namespace Plugin
         public:
             inline static REX::INI::I32 iLogLevel{ "General", "iLogLevel", static_cast<std::int32_t>(REX::ELogLevel::Info) };
             inline static REX::INI::F32 fPlayerVoiceFrequency{ "General", "fFrequency", 1.0f };
+            inline static REX::INI::F32 fSlowTimeInfluence{ "General", "fSlowTimeInfluence", 1.0f };
+            inline static REX::INI::Bool bSyncDialogueTimer{ "General", "bSyncDialogueTimer", true };
         };
 
         static void Load();
@@ -17,7 +19,6 @@ namespace Plugin
         static void Register();
 
     private:
-        // Nested classes/structs must be fully declared in the header
         class EventHandler :
             public REX::TSingleton<EventHandler>,
             public RE::BSTEventSink<RE::MenuOpenCloseEvent>
@@ -38,8 +39,6 @@ namespace Plugin
                 return RE::BSEventNotifyControl::kContinue;
             }
         };
-
-        static void UpdateGameSetting();
 
         inline static bool bRegistered{ false };
     };

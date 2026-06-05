@@ -15,6 +15,9 @@ add_rules("plugin.vsxmake.autoupdate")
 -- set config
 set_config("commonlib_ini", true)
 
+-- packages
+add_requires("minhook")
+
 -- define targets
 target("PlayerVoiceFrequency")
     add_rules("commonlibf4.plugin", {
@@ -28,3 +31,5 @@ target("PlayerVoiceFrequency")
     add_headerfiles("src/**.h", "include/**.h")
     add_includedirs("src", "include")
     set_pcxxheader("src/pch.h")
+
+    add_packages("minhook")
