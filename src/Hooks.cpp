@@ -6,7 +6,7 @@ namespace Plugin
     {
         REX::DEBUG("{}", __FUNCTION__);
         const char* soundCategoryEditorID = "AudioCategoryVOCPlayer";
-        audioCategoryVOCPlayer = RE::TESForm::GetFormByEditorID<RE::BGSSoundCategory>(soundCategoryEditorID);
+        audioCategoryVOCPlayer = RE::TESForm::GetFormByID<RE::BGSSoundCategory>(0x000B0EA4);
         if (!audioCategoryVOCPlayer) {
             REX::ERROR("Failed to find sound category: {}", soundCategoryEditorID);
             return;
