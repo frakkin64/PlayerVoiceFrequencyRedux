@@ -9,7 +9,7 @@ namespace Plugin
         {
         public:
             inline static REX::INI::I32 iLogLevel{ "General", "iLogLevel", static_cast<std::int32_t>(REX::ELogLevel::Info) };
-            inline static REX::INI::F32 fPlayerVoiceFrequency{ "General", "fFrequency", 1.12f };
+            inline static REX::INI::F32 fPlayerVoiceFrequency{ "General", "fFrequency", 1.0f };
         };
 
         static void Load();

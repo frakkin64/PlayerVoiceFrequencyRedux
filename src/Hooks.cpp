@@ -34,12 +34,13 @@ namespace Plugin
     {
         REX::DEBUG("{}", __FUNCTION__);
         if (audioCategoryVOCPlayer) {
-            audioCategoryVOCPlayer->frequencyMult = Plugin::Settings::General::fPlayerVoiceFrequency.GetValue();
+            float clampedFrequency = std::clamp(Plugin::Settings::General::fPlayerVoiceFrequency.GetValue(), 0.5f, 1.5f);
+
+            audioCategoryVOCPlayer->frequencyMult = clampedFrequency;
             REX::DEBUG("Set frequencyMult to {}", audioCategoryVOCPlayer->frequencyMult);
 
-            audioCategoryVOCPlayer->minFrequencyMult = Plugin::Settings::General::fPlayerVoiceFrequency.GetValue() * 0.1f;
+            audioCategoryVOCPlayer->minFrequencyMult = clampedFrequency * 0.1f;
             REX::DEBUG("Set minFrequencyMult to {}", audioCategoryVOCPlayer->minFrequencyMult);
         }
     }
-
 }
