@@ -33,7 +33,7 @@ F4SE_PLUGIN_LOAD(const F4SE::LoadInterface* a_f4se)
 			case F4SE::MessagingInterface::kGameDataReady:
 				REX::DEBUG("kGameDataReady {}", static_cast<bool>(a_msg->data));
 				if (static_cast<bool>(a_msg->data)) {
-					Plugin::Settings::Update();
+					Plugin::Settings::Register();
 					Plugin::Hooks::Initialize();
 				}
 				break;

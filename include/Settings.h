@@ -14,6 +14,7 @@ namespace Plugin
 
         static void Load();
         static void Update();
+        static void Register();
 
     private:
         // Nested classes/structs must be fully declared in the header
@@ -38,7 +39,6 @@ namespace Plugin
             }
         };
 
-        static void Register();
         static void UpdateGameSetting();
 
         inline static bool bRegistered{ false };

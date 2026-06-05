@@ -5,10 +5,9 @@ namespace Plugin
     void Hooks::Initialize()
     {
         REX::DEBUG("{}", __FUNCTION__);
-        const char* soundCategoryEditorID = "AudioCategoryVOCPlayer";
         audioCategoryVOCPlayer = RE::TESForm::GetFormByID<RE::BGSSoundCategory>(0x000B0EA4);
         if (!audioCategoryVOCPlayer) {
-            REX::ERROR("Failed to find sound category: {}", soundCategoryEditorID);
+            REX::ERROR("Failed to find AudioCategoryVOCPlayer sound category.");
             return;
         }
 
@@ -25,7 +24,7 @@ namespace Plugin
 
     void Hooks::SetGlobalTimeMultipler(RE::VATS *a_this, float a_magicTimeSlowdown, float a_playerMagicTimeSlowdown)
     {
-        REX::DEBUG("{}", __FUNCTION__);
+        REX::DEBUG("{}({}, {})", __FUNCTION__, a_magicTimeSlowdown, a_playerMagicTimeSlowdown);
         _SetGlobalTimeMultipler(a_this, a_magicTimeSlowdown, a_playerMagicTimeSlowdown);
         UpdatePlayerFrequency();
     }

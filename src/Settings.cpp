@@ -16,7 +16,6 @@ namespace Plugin
     void Settings::Update()
     {
         REX::DEBUG("{}", __FUNCTION__);
-        Register();
 
         Load();
         UpdateGameSetting();
