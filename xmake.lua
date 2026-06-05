@@ -12,16 +12,19 @@ set_warnings("allextra")
 add_rules("mode.debug", "mode.releasedbg")
 add_rules("plugin.vsxmake.autoupdate")
 
+-- set config
+set_config("commonlib_ini", true)
+
 -- define targets
 target("PlayerVoiceFrequency")
     add_rules("commonlibf4.plugin", {
         name = "PlayerVoiceFrequencyRedux",
         author = "frakkin64",
-        description = "F4SE plugin template using CommonLibF4"
+        description = "F4SE plugin using CommonLibF4"
     })
 
     -- add src files
     add_files("src/**.cpp")
-    add_headerfiles("src/**.h")
-    add_includedirs("src")
+    add_headerfiles("src/**.h", "include/**.h")
+    add_includedirs("src", "include")
     set_pcxxheader("src/pch.h")
